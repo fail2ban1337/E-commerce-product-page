@@ -22,8 +22,8 @@ export const rootTheme = {
   white: "hsl(0, 0%, 100%)",
   black: "hsl(0, 0%, 0%)",
   lightbox_background: "hsl(0, 0%, 0%, .75)",
-  font_white_400: "400",
-  font_white_700: "700",
+  font_weight_400: "400",
+  font_weight_700: "700",
   orange: "hsl(26, 100%, 55%)",
   pale_orange: "hsl(25, 100%, 94%)",
 };

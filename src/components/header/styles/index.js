@@ -8,7 +8,7 @@ export const Container = styled.header`
   height: 100px;
   max-width: 1440px;
   margin: 0 auto;
-  border-bottom: 1px solid ${({ theme }) => theme.dark_grayish_blue};
+  border-bottom: 1px solid ${({ theme }) => theme.light_grayish_blue};
 `;
 
 export const Logo = styled.img``;
@@ -49,15 +49,72 @@ export const ProfileContainer = styled.div`
 export const CartContainer = styled.div``;
 
 export const CartImage = styled.img``;
-export const CartElement = styled.div`
+export const CartElements = styled.div`
   position: absolute;
   top: 70px;
   right: 0;
-  width: 350px;
-  height: 250px;
+  width: 370px;
   background: ${({ theme }) => theme.white};
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const CardElementTitle = styled.span`
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.light_grayish_blue};
+  display: block;
+  padding: 25px 0 25px 25px;
+  align-self: flex-start;
+  font-weight: ${({ theme }) => theme.font_weight_400};
+`;
+export const CardElementAddedContainer = styled.div`
+  margin: 15px 25px 0 25px;
+  .checkout_btn {
+    width: 100%;
+    height: 70px;
+    margin: 25px 0;
+    border-radius: 15px;
+    background: ${({ theme }) => theme.orange};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    a {
+      text-decoration: none;
+      color: ${({ theme }) => theme.white};
+    }
+  }
+`;
+
+export const CardElementAddedRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  .product_image {
+    width: 50px;
+    border-radius: 5px;
+  }
+  .elementColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    align-self: flex-start;
+
+    h5 {
+      font-weight: ${({ theme }) => theme.font_weight_400};
+      color: ${({ theme }) => theme.dark_grayish_blue};
+      font-size: 16px;
+      b {
+        color: ${({ theme }) => theme.black};
+      }
+    }
+  }
+  .dltImage {
+    cursor: pointer;
+  }
 `;
 export const UserImage = styled.img`
   width: 60px;
