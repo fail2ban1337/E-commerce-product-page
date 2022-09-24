@@ -32,6 +32,13 @@ export default function HeaderContainer() {
           </Header.NavListElement>
         </Header.NavList>
       </Header.NavListContainer>
+      <Header.ProfileContainer>
+        <Header.CartContainer>
+          <Header.CartImage src="images/icon-cart.svg" />
+          <Header.CartElement></Header.CartElement>
+        </Header.CartContainer>
+        <Header.UserImage src="images/image-avatar.png" />
+      </Header.ProfileContainer>
     </Header>
   );
 }

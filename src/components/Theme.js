@@ -24,4 +24,6 @@ export const rootTheme = {
   lightbox_background: "hsl(0, 0%, 0%, .75)",
   font_white_400: "400",
   font_white_700: "700",
+  orange: "hsl(26, 100%, 55%)",
+  pale_orange: "hsl(25, 100%, 94%)",
 };
