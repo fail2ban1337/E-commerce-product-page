@@ -6,8 +6,11 @@ import React, {
   useEffect,
 } from "react";
 import {
+  CardElementAddedContainer,
+  CardElementAddedRow,
+  CardElementTitle,
   CartContainer,
-  CartElement,
+  CartElements,
   CartImage,
   Container,
   Logo,
@@ -91,16 +94,63 @@ function useOutsideAlerter(ref) {
     };
   }, [ref]);
 }
-Header.CartElement = function HeaderCartElement({ children, ...restProps }) {
+Header.CartElements = function HeaderCartElements({ children, ...restProps }) {
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
   const { card, setCard } = useContext(CartContext);
   const { cardActive } = card;
   return (
-    <>{cardActive && <CartElement ref={wrapperRef}>{children}</CartElement>}</>
+    <>
+      {cardActive && <CartElements ref={wrapperRef}>{children}</CartElements>}
+    </>
   );
 };
+
+Header.CardElementTitle = function ({ children }) {
+  return <CardElementTitle>{children}</CardElementTitle>;
+};
+
+Header.CardElementAddedContainer = function ({ children }) {
+  return (
+    <CardElementAddedContainer>
+      <CardElementAddedRow>
+        <img
+          className="product_image"
+          src="images/image-product-1-thumbnail.jpg"
+        />
+        <div className="elementColumn">
+          <h5>Fall Limited Edition Sneakers</h5>
+          <h5>
+            $125$.00 x 3 <b>$375.00</b>
+          </h5>
+        </div>
+        <img className="dltImage" src="images/icon-delete.svg" />
+      </CardElementAddedRow>
+      <div className="checkout_btn">
+        <a href="#">Checkout</a>
+      </div>
+    </CardElementAddedContainer>
+  );
+};
+
+// Header.CardElementAddedRow = function ({ children }) {
+//   return (
+//     <CardElementAddedRow>
+//       <img
+//         className="product_image"
+//         src="images/image-product-1-thumbnail.jpg"
+//       />
+//       <div className="elementColumn">
+//         <h5>Fall Limited Edition Sneakers</h5>
+//         <h5>
+//           $125$.00 x 3 <b>$375.00</b>
+//         </h5>
+//       </div>
+//       <img src="images/icon-delete.svg" />
+//     </CardElementAddedRow>
+//   );
+// };
 
 Header.UserImage = function ({ ...restProps }) {
   return <UserImage {...restProps} />;

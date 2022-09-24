@@ -35,7 +35,10 @@ export default function HeaderContainer() {
       <Header.ProfileContainer>
         <Header.CartContainer>
           <Header.CartImage src="images/icon-cart.svg" />
-          <Header.CartElement></Header.CartElement>
+          <Header.CartElements>
+            <Header.CardElementTitle>Card</Header.CardElementTitle>
+            <Header.CardElementAddedContainer />
+          </Header.CartElements>
         </Header.CartContainer>
         <Header.UserImage src="images/image-avatar.png" />
       </Header.ProfileContainer>
