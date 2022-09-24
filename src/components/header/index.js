@@ -133,25 +133,6 @@ Header.CardElementAddedContainer = function ({ children }) {
     </CardElementAddedContainer>
   );
 };
-
-// Header.CardElementAddedRow = function ({ children }) {
-//   return (
-//     <CardElementAddedRow>
-//       <img
-//         className="product_image"
-//         src="images/image-product-1-thumbnail.jpg"
-//       />
-//       <div className="elementColumn">
-//         <h5>Fall Limited Edition Sneakers</h5>
-//         <h5>
-//           $125$.00 x 3 <b>$375.00</b>
-//         </h5>
-//       </div>
-//       <img src="images/icon-delete.svg" />
-//     </CardElementAddedRow>
-//   );
-// };
-
 Header.UserImage = function ({ ...restProps }) {
   return <UserImage {...restProps} />;
 };
