@@ -32,6 +32,7 @@ Header.Logo = function ({ children, ...restProps }) {
 };
 Header.NavListContainer = function ({ children, ...restProps }) {
   return <NavListContainer {...restProps}>{children}</NavListContainer>;
+  console.log("render");
 };
 
 Header.NavList = function ({ children, ...restProps }) {
@@ -59,19 +60,16 @@ Header.CartContainer = function HeaderCartContainer({
     </CartContext.Provider>
   );
 };
-Header.CartImage = function HeaderCartImage({ children, ...restProps }) {
+Header.CartImage = React.memo(({ children, ...restProps }) => {
   const { card, setCard } = useContext(CartContext);
-
-  console.log(card);
   const handlcartOpen = () => {
     setCard((state) => ({
       ...state,
       cardActive: !state.cardActive,
     }));
   };
-
   return <CartImage onClick={() => handlcartOpen()} {...restProps} />;
-};
+});
 function useOutsideAlerter(ref) {
   const { card, setCard } = useContext(CartContext);
   useEffect(() => {
