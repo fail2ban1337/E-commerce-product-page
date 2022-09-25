@@ -62,7 +62,6 @@ Header.CartContainer = function HeaderCartContainer({
 Header.CartImage = function HeaderCartImage({ children, ...restProps }) {
   const { card, setCard } = useContext(CartContext);
 
-  console.log(card);
   const handlcartOpen = () => {
     setCard((state) => ({
       ...state,
