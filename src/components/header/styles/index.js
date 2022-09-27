@@ -9,6 +9,9 @@ export const Container = styled.header`
   max-width: 1440px;
   margin: 0 auto;
   border-bottom: 1px solid ${({ theme }) => theme.light_grayish_blue};
+  @media (max-width: 1478px) {
+    margin: 0 2rem;
+  }
 `;
 
 export const Logo = styled.img``;
@@ -16,11 +19,35 @@ export const Logo = styled.img``;
 export const NavListContainer = styled.div`
   height: 100%;
   margin: auto 0;
+  @media (max-width: 861px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    background: ${({ theme }) => theme.white};
+  }
+  .test {
+    background: red;
+  }
+`;
+
+export const NavClose = styled.div`
+  display: block;
+  margin: 2rem 0 0 2rem;
+  @media (min-width: 862px) {
+    display: none;
+  }
 `;
 export const NavList = styled.ul`
   display: flex;
   gap: 50px;
   height: 100%;
+  @media (max-width: 861px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 2rem;
+    margin-top: 4rem;
+  }
 `;
 export const NavListElement = styled.li`
   list-style: none;
