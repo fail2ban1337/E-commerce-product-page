@@ -9,13 +9,20 @@ export const RowContainer = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-between;
+  /* flex-wrap: wrap; */
+  @media (max-width: 1550px) {
+    margin: 0 2rem;
+  }
+  @media (max-width: 1210px) {
+    flex-direction: column;
+    padding-bottom: 2rem;
+  }
 `;
 export const ImageSection = styled.div`
   flex-basis: 50%;
   padding: 70px;
   display: flex;
   justify-content: flex-end;
-
   .ImageSectionCol {
     .ImageSectionColContainer {
       width: 100%;
@@ -42,6 +49,19 @@ export const ImageSection = styled.div`
           height: 100px;
           width: auto;
           border-radius: 15px;
+        }
+      }
+    }
+  }
+  @media (max-width: 1210px) {
+    .ImageSectionCol {
+      .ImageSectionColContainer {
+        width: 100%;
+        .image_product {
+          width: 70%;
+        }
+        .ImageSectionRow {
+          display: none;
         }
       }
     }
