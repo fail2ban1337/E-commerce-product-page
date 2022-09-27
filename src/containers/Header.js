@@ -6,6 +6,7 @@ export default function HeaderContainer() {
     <Header>
       <Header.Logo src="images/logo.svg" />
       <Header.NavListContainer>
+        <Header.NavClose />
         <Header.NavList>
           <Header.NavListElement>
             <Header.NavListElementLink href="#">
