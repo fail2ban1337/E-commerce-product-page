@@ -14,6 +14,12 @@ export const Container = styled.header`
   }
 `;
 
+export const Burgger = styled.div`
+  @media (min-width: 862px) {
+    display: none;
+  }
+`;
+
 export const Logo = styled.img``;
 
 export const NavListContainer = styled.div`
@@ -21,18 +27,19 @@ export const NavListContainer = styled.div`
   margin: auto 0;
   @media (max-width: 861px) {
     position: fixed;
-    left: 0;
     top: 0;
-    width: 300px;
+    left: 0;
+    width: ${(props) => (props.open ? "240px" : "0px")};
+    overflow: hidden;
     background: ${({ theme }) => theme.white};
+    transition: all 0.3s ease-in;
   }
   .test {
-    background: red;
   }
 `;
 
 export const NavClose = styled.div`
-  display: block;
+  display: inline-block;
   margin: 2rem 0 0 2rem;
   @media (min-width: 862px) {
     display: none;
@@ -150,4 +157,14 @@ export const UserImage = styled.img`
   &:hover {
     border: 2px solid ${({ theme }) => theme.orange};
   }
+`;
+
+export const MainOpc = styled.div`
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
 `;

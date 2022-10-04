@@ -4,6 +4,8 @@ import { Header } from "../components";
 export default function HeaderContainer() {
   return (
     <Header>
+      <Header.MainOpc />
+      <Header.Burgger />
       <Header.Logo src="images/logo.svg" />
       <Header.NavListContainer>
         <Header.NavClose />
