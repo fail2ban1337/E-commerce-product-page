@@ -15,6 +15,7 @@ export const Container = styled.header`
 `;
 
 export const Burgger = styled.div`
+  z-index: 1;
   @media (min-width: 862px) {
     display: none;
   }
@@ -32,6 +33,7 @@ export const NavListContainer = styled.div`
     width: ${(props) => (props.open ? "240px" : "0px")};
     overflow: hidden;
     background: ${({ theme }) => theme.white};
+    z-index: 3;
     transition: all 0.3s ease-in;
   }
   .test {
@@ -84,6 +86,7 @@ export const CartContainer = styled.div``;
 
 export const CartImage = styled.img``;
 export const CartElements = styled.div`
+  z-index: 1;
   position: absolute;
   top: 70px;
   right: 0;
@@ -165,6 +168,7 @@ export const MainOpc = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  z-index: 9999;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
 `;

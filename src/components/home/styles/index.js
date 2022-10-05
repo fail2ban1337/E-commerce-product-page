@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   max-width: 1440px;
   margin: 70px auto;
+  overflow: hidden;
+  position: fixed;
 `;
 
 export const RowContainer = styled.div`
@@ -57,11 +59,17 @@ export const ImageSection = styled.div`
     .ImageSectionCol {
       .ImageSectionColContainer {
         width: 100%;
-        .image_product {
-          width: 70%;
-        }
         .ImageSectionRow {
           display: none;
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1210px) {
+    .ImageSectionCol {
+      .ImageSectionColContainer {
+        .image_product {
+          width: 60%;
         }
       }
     }
@@ -158,6 +166,11 @@ export const PorductInfo = styled.div`
           font-weight: ${({ theme }) => theme.font_weight_700};
         }
       }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1210px) {
+    .productDesc {
+      width: 70%;
     }
   }
 `;
