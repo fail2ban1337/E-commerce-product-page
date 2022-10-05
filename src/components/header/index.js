@@ -104,9 +104,7 @@ Header.CartContainer = function HeaderCartContainer({
   children,
   ...restProps
 }) {
-  const [card, setCard] = useState({
-    cardActive: false,
-  });
+  const [card, setCard] = useState(false);
   return (
     <CartContext.Provider value={{ card, setCard }}>
       <CartContainer>{children}</CartContainer>
@@ -117,29 +115,33 @@ Header.CartImage = function HeaderCartImage({ children, ...restProps }) {
   const { card, setCard } = useContext(CartContext);
 
   const handlcartOpen = () => {
-    setCard((state) => ({
-      ...state,
-      cardActive: !state.cardActive,
-    }));
+    setCard((previous) => !previous);
   };
 
   return <CartImage onClick={() => handlcartOpen()} {...restProps} />;
 };
-function useOutsideAlerter(ref) {
-  const { card, setCard } = useContext(CartContext);
+function useOutsideAlerter(ref, setFunc, checkClick) {
   useEffect(() => {
     /**
      * Alert if clicked on outside of element
      */
     function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setCard((state) => ({
-          ...state,
-          cardActive: false,
-        }));
+      if (
+        ref.current &&
+        !ref.current.contains(event.target) &&
+        checkClick === "CartElements"
+      ) {
+        setFunc(false);
+      }
+      if (
+        ref.current &&
+        ref.current.contains(event.target) &&
+        checkClick === "MainOpc"
+      ) {
+        setFunc(false);
       }
     }
-    // Bind the event listener
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       // Unbind the event listener on clean up
@@ -149,15 +151,13 @@ function useOutsideAlerter(ref) {
 }
 Header.CartElements = function HeaderCartElements({ children, ...restProps }) {
   const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef);
 
   const { card, setCard } = useContext(CartContext);
-  const { cardActive } = card;
+  const checkClick = "CartElements";
+  useOutsideAlerter(wrapperRef, setCard, checkClick);
+
   return (
-    <CartElements
-      style={{ display: cardActive ? "block" : "none" }}
-      ref={wrapperRef}
-    >
+    <CartElements style={{ display: card ? "block" : "none" }} ref={wrapperRef}>
       {children}
     </CartElements>
   );
@@ -193,6 +193,11 @@ Header.UserImage = function ({ ...restProps }) {
   return <UserImage {...restProps} />;
 };
 
-Header.MainOpc = function ({ ...restProps }) {
-  return <MainOpc></MainOpc>;
+Header.MainOpc = function HeaderMainOpc({ children, ...restProps }) {
+  const { closeNav, setCloseNav } = useContext(ColpseContent);
+  const wrapperRef = useRef(null);
+  const checkClick = "MainOpc";
+  useOutsideAlerter(wrapperRef, setCloseNav, checkClick);
+  if (!closeNav) return null;
+  return <MainOpc ref={wrapperRef}>{children}</MainOpc>;
 };
