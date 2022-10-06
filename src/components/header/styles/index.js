@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Container = styled.header`
   display: flex;
@@ -12,10 +12,15 @@ export const Container = styled.header`
   @media (max-width: 1478px) {
     margin: 0 2rem;
   }
+  @media (min-width: 320px) and (max-width: 480px) {
+    margin: 0 1rem;
+  }
 `;
 
 export const Burgger = styled.div`
   z-index: 1;
+  top: 4px;
+  position: relative;
   @media (min-width: 862px) {
     display: none;
   }
@@ -81,6 +86,9 @@ export const ProfileContainer = styled.div`
   align-items: center;
   gap: 30px;
   position: relative;
+  @media (min-width: 320px) and (max-width: 480px) {
+    gap: 20px;
+  }
 `;
 export const CartContainer = styled.div``;
 
@@ -96,6 +104,10 @@ export const CartElements = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  @media (min-width: 320px) and (max-width: 480px) {
+    right: -15px;
+    width: 295px;
+  }
 `;
 
 export const CardElementTitle = styled.span`
@@ -110,7 +122,7 @@ export const CardElementAddedContainer = styled.div`
   margin: 15px 25px 0 25px;
   .checkout_btn {
     width: 100%;
-    height: 70px;
+    height: 3rem;
     margin: 25px 0;
     border-radius: 15px;
     background: ${({ theme }) => theme.orange};

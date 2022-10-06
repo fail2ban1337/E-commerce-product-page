@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Container = styled.div`
   max-width: 1440px;
   margin: 70px auto;
-  overflow: hidden;
-  position: fixed;
+  /* overflow: hidden;
+  position: fixed; */
 `;
 
 export const RowContainer = styled.div`
@@ -73,6 +73,9 @@ export const ImageSection = styled.div`
         }
       }
     }
+  }
+  @media (min-width: 320px) and (max-width: 480px) {
+    padding: 35px;
   }
 `;
 
@@ -168,9 +171,32 @@ export const PorductInfo = styled.div`
       }
     }
   }
+  @media (max-width: 768px) {
+    margin-left: 0;
+    .productSectionCol {
+      .btnRow {
+        flex-direction: column;
+        .add_product_number {
+          flex-basis: auto;
+          width: 100%;
+        }
+        .add_productToCard {
+          flex-basis: auto;
+          width: 100%;
+        }
+      }
+    }
+  }
   @media (min-width: 768px) and (max-width: 1210px) {
     .productDesc {
       width: 70%;
+    }
+  }
+  @media (min-width: 320px) and (max-width: 480px) {
+    .productSectionCol {
+      h2 {
+        font-size: 3rem;
+      }
     }
   }
 `;
