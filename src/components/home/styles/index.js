@@ -89,6 +89,13 @@ export const PorductInfo = styled.div`
     align-items: flex-start;
     justify-content: center;
     gap: 40px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    svg {
+      cursor: pointer;
+    }
     h3 {
       font-size: 16px;
       color: ${({ theme }) => theme.orange};
@@ -154,6 +161,7 @@ export const PorductInfo = styled.div`
         flex-basis: 60%;
         background: ${({ theme }) => theme.orange};
         border-radius: 15px;
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;

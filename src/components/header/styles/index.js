@@ -130,10 +130,17 @@ export const CardElementAddedContainer = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
     a {
       text-decoration: none;
       color: ${({ theme }) => theme.white};
     }
+  }
+  .emptyCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem 0;
   }
 `;
 
