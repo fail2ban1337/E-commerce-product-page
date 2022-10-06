@@ -24,6 +24,7 @@ import {
   UserImage,
   MainOpc,
 } from "./styles";
+import { CartHandleContext } from "../../App";
 
 const CartContext = createContext();
 const ColpseContent = createContext();
@@ -51,7 +52,7 @@ Header.Burgger = function HeaderBurgger({ children, ...restProps }) {
         <path
           d="M16 12v3H0v-3h16Zm0-6v3H0V6h16Zm0-6v3H0V0h16Z"
           fill="#69707D"
-          fill-rule="evenodd"
+          fillRule="evenodd"
         />
       </svg>
     </Burgger>
@@ -81,7 +82,7 @@ Header.NavClose = function HeaderNavListContainer({ children, ...restProps }) {
         <path
           d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
           fill="#69707D"
-          fill-rule="evenodd"
+          fillRule="evenodd"
         />
       </svg>
     </NavClose>
@@ -120,10 +121,10 @@ Header.CartImage = function HeaderCartImage({ children, ...restProps }) {
 
   return <CartImage onClick={() => handlcartOpen()} {...restProps} />;
 };
-function useOutsideAlerter(ref, setFunc, checkClick) {
+function useOutsideAlerter(ref, setFunc, checkClick, state) {
   useEffect(() => {
     /**
-     * Alert if clicked on outside of element
+     * check if clicked on outside of element
      */
     function handleClickOutside(event) {
       if (
@@ -133,6 +134,9 @@ function useOutsideAlerter(ref, setFunc, checkClick) {
       ) {
         setFunc(false);
       }
+      /**
+       * check if clicked on outside sidebar of element
+       */
       if (
         ref.current &&
         ref.current.contains(event.target) &&
@@ -141,20 +145,19 @@ function useOutsideAlerter(ref, setFunc, checkClick) {
         setFunc(false);
       }
     }
-
-    document.addEventListener("mousedown", handleClickOutside);
+    if (state) document.addEventListener("mousedown", handleClickOutside);
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, [ref, state]);
 }
 Header.CartElements = function HeaderCartElements({ children, ...restProps }) {
   const wrapperRef = useRef(null);
 
   const { card, setCard } = useContext(CartContext);
   const checkClick = "CartElements";
-  useOutsideAlerter(wrapperRef, setCard, checkClick);
+  useOutsideAlerter(wrapperRef, setCard, checkClick, card);
 
   return (
     <CartElements style={{ display: card ? "block" : "none" }} ref={wrapperRef}>
@@ -167,25 +170,41 @@ Header.CardElementTitle = function ({ children }) {
   return <CardElementTitle>{children}</CardElementTitle>;
 };
 
-Header.CardElementAddedContainer = function ({ children }) {
+Header.CardElementAddedContainer = function HeaderCardElementAddedContainer({
+  children,
+}) {
+  const { cart, setCart } = useContext(CartHandleContext);
+  console.log(cart.length);
   return (
     <CardElementAddedContainer>
-      <CardElementAddedRow>
-        <img
-          className="product_image"
-          src="images/image-product-1-thumbnail.jpg"
-        />
-        <div className="elementColumn">
-          <h5>Fall Limited Edition Sneakers</h5>
-          <h5>
-            $125$.00 x 3 <b>$375.00</b>
-          </h5>
+      {Object.values(cart).map((value, index) => {
+        return (
+          <div className="CardElementAddedRow" key={index}>
+            <img className="product_image" src={value.productImg} />
+            <div className="elementColumn">
+              <h5>{value.productName}</h5>
+              <h5>
+                ${value.productPrice} x {value.prdTotal}{" "}
+                <b>${(value.productPrice * value.prdTotal).toFixed(2)}</b>
+              </h5>
+            </div>
+            <img
+              className="dltImage"
+              src="images/icon-delete.svg"
+              onClick={() => setCart({})}
+            />
+          </div>
+        );
+      })}
+      {Object.keys(cart).length !== 0 ? (
+        <div className="checkout_btn">
+          <a href="#">Checkout</a>
         </div>
-        <img className="dltImage" src="images/icon-delete.svg" />
-      </CardElementAddedRow>
-      <div className="checkout_btn">
-        <a href="#">Checkout</a>
-      </div>
+      ) : (
+        <div className="emptyCard">
+          <p>Empty ,You Add New product</p>
+        </div>
+      )}
     </CardElementAddedContainer>
   );
 };
@@ -197,7 +216,7 @@ Header.MainOpc = function HeaderMainOpc({ children, ...restProps }) {
   const { closeNav, setCloseNav } = useContext(ColpseContent);
   const wrapperRef = useRef(null);
   const checkClick = "MainOpc";
-  useOutsideAlerter(wrapperRef, setCloseNav, checkClick);
+  useOutsideAlerter(wrapperRef, setCloseNav, checkClick, closeNav);
   if (!closeNav) return null;
   return <MainOpc ref={wrapperRef}>{children}</MainOpc>;
 };
