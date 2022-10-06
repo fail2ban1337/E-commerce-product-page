@@ -12,6 +12,34 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background: ${({ theme }) => theme.white};
     }
+    .CardElementAddedRow {
+        display: flex;
+  align-items: center;
+  gap: 15px;
+  .product_image {
+    width: 50px;
+    border-radius: 5px;
+  }
+  .elementColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    align-self: flex-start;
+
+    h5 {
+      font-weight: ${({ theme }) => theme.font_weight_400};
+      color: ${({ theme }) => theme.dark_grayish_blue};
+      font-size: 16px;
+      b {
+        color: ${({ theme }) => theme.black};
+      }
+    }
+  }
+  .dltImage {
+    cursor: pointer;
+  }
+    }
 }
 `;
 export const rootTheme = {
