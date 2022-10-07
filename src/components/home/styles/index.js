@@ -40,17 +40,18 @@ export const ImageSection = styled.div`
         border-radius: 15px;
       }
       .ImageSectionRow {
-        display: grid;
-        grid-auto-flow: row;
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        display: flex;
         justify-content: space-between;
         width: 100%;
         margin-top: 30px;
-        .image_thumb {
-          height: 100px;
-          width: auto;
-          border-radius: 15px;
+        .image_thumb_container {
+          flex-basis: calc(80% / 4);
+          height: 110px;
+          .image_thumb {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+          }
         }
       }
     }

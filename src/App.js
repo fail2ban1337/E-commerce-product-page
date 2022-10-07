@@ -9,8 +9,8 @@ function App() {
   const [cart, setCart] = useState({});
   return (
     <ThemeProvider theme={rootTheme}>
-      <GlobalStyle />
       <CartHandleContext.Provider value={{ cart, setCart }}>
+        <GlobalStyle />
         <Header />
         <HomePage />
       </CartHandleContext.Provider>

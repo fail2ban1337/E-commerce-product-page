@@ -65,7 +65,7 @@ Header.NavListContainer = function HeaderNavListContainer({
   children,
   ...restProps
 }) {
-  const { closeNav, setCloseNav } = useContext(ColpseContent);
+  const { closeNav } = useContext(ColpseContent);
 
   return (
     <NavListContainer open={closeNav} {...restProps}>
@@ -105,21 +105,28 @@ Header.CartContainer = function HeaderCartContainer({
   children,
   ...restProps
 }) {
-  const [card, setCard] = useState(false);
+  const [cardopen, setCardopen] = useState(false);
   return (
-    <CartContext.Provider value={{ card, setCard }}>
+    <CartContext.Provider value={{ cardopen, setCardopen }}>
       <CartContainer>{children}</CartContainer>
     </CartContext.Provider>
   );
 };
 Header.CartImage = function HeaderCartImage({ children, ...restProps }) {
-  const { card, setCard } = useContext(CartContext);
-
+  const { cardopen, setCardopen } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartHandleContext);
   const handlcartOpen = () => {
-    setCard((previous) => !previous);
+    setCardopen((previous) => !previous);
   };
 
-  return <CartImage onClick={() => handlcartOpen()} {...restProps} />;
+  return (
+    <CartImage onClick={() => handlcartOpen()} {...restProps}>
+      {Object.keys(cart).length > 0 ? (
+        <div className="cartNumber">{Object.keys(cart).length}</div>
+      ) : null}
+      <img src="images/icon-cart.svg" />
+    </CartImage>
+  );
 };
 function useOutsideAlerter(ref, setFunc, checkClick, state) {
   useEffect(() => {
@@ -155,12 +162,15 @@ function useOutsideAlerter(ref, setFunc, checkClick, state) {
 Header.CartElements = function HeaderCartElements({ children, ...restProps }) {
   const wrapperRef = useRef(null);
 
-  const { card, setCard } = useContext(CartContext);
+  const { cardopen, setCardopen } = useContext(CartContext);
   const checkClick = "CartElements";
-  useOutsideAlerter(wrapperRef, setCard, checkClick, card);
+  useOutsideAlerter(wrapperRef, setCardopen, checkClick, cardopen);
 
   return (
-    <CartElements style={{ display: card ? "block" : "none" }} ref={wrapperRef}>
+    <CartElements
+      style={{ display: cardopen ? "block" : "none" }}
+      ref={wrapperRef}
+    >
       {children}
     </CartElements>
   );
