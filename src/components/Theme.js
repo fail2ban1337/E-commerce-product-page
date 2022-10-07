@@ -12,8 +12,8 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background: ${({ theme }) => theme.white};
     }
-    .CardElementAddedRow {
-        display: flex;
+  .CardElementAddedRow {
+  display: flex;
   align-items: center;
   gap: 15px;
   .product_image {

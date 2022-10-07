@@ -16,22 +16,30 @@ Home.ImageSection = function ({ children, ...restProps }) {
         <div className="ImageSectionColContainer">
           <img className="image_product" src="images/image-product-1.jpg" />
           <div className="ImageSectionRow">
-            <img
-              className="image_thumb"
-              src="images/image-product-1-thumbnail.jpg"
-            />
-            <img
-              className="image_thumb"
-              src="images/image-product-2-thumbnail.jpg"
-            />
-            <img
-              className="image_thumb"
-              src="images/image-product-3-thumbnail.jpg"
-            />
-            <img
-              className="image_thumb"
-              src="images/image-product-4-thumbnail.jpg"
-            />
+            <div className="image_thumb_container">
+              <img
+                className="image_thumb"
+                src="images/image-product-1-thumbnail.jpg"
+              />
+            </div>
+            <div className="image_thumb_container">
+              <img
+                className="image_thumb"
+                src="images/image-product-2-thumbnail.jpg"
+              />
+            </div>
+            <div className="image_thumb_container">
+              <img
+                className="image_thumb"
+                src="images/image-product-3-thumbnail.jpg"
+              />
+            </div>
+            <div className="image_thumb_container">
+              <img
+                className="image_thumb"
+                src="images/image-product-4-thumbnail.jpg"
+              />
+            </div>
           </div>
         </div>
       </div>
