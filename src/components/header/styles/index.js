@@ -92,7 +92,22 @@ export const ProfileContainer = styled.div`
 `;
 export const CartContainer = styled.div``;
 
-export const CartImage = styled.img``;
+export const CartImage = styled.div`
+  position: relative;
+  .cartNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -8px;
+    right: -20px;
+    position: absolute;
+    background: ${({ theme }) => theme.orange};
+    padding: 1px 10px;
+    border-radius: 50%;
+    font-size: 1rem;
+    color: white;
+  }
+`;
 export const CartElements = styled.div`
   z-index: 1;
   position: absolute;
