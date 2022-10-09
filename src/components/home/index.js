@@ -1,5 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Container, ImageSection, PorductInfo, RowContainer } from "./styles";
+import {
+  Container,
+  ImageSection,
+  PorductInfo,
+  ImageThumbContainer,
+  RowContainer,
+  ImageSlider,
+} from "./styles";
 import { CartHandleContext } from "../../App";
 export default function Home({ children, ...restProps }) {
   return <Container>{children}</Container>;
@@ -9,37 +16,81 @@ Home.RowContainer = function ({ children, ...restProps }) {
   return <RowContainer>{children}</RowContainer>;
 };
 
-Home.ImageSection = function ({ children, ...restProps }) {
+Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
+  const [chosenImage, setChosenImage] = useState({
+    imagesrc: "./images/image-product-1.jpg",
+  });
+  const [styleImage, setStyleImage] = useState(1);
+  const image = {
+    iamge1: {
+      thumbnail: "./images/image-product-1-thumbnail.jpg",
+      imagesrc: "./images/image-product-1.jpg",
+    },
+    iamge2: {
+      thumbnail: "./images/image-product-2-thumbnail.jpg",
+      imagesrc: "./images/image-product-2.jpg",
+    },
+    iamge3: {
+      thumbnail: "./images/image-product-3-thumbnail.jpg",
+      imagesrc: "./images/image-product-3.jpg",
+    },
+    iamge4: {
+      thumbnail: "./images/image-product-4-thumbnail.jpg",
+      imagesrc: "./images/image-product-4.jpg",
+    },
+  };
+
+
+  const HandleChangeImage = (value, index) => {
+    setStyleImage(++index);
+    setChosenImage(value);
+  };
   return (
     <ImageSection>
       <div className="ImageSectionCol">
         <div className="ImageSectionColContainer">
-          <img className="image_product" src="images/image-product-1.jpg" />
+          <div className="image_product_Container">
+            <div className="imageSlideNext">
+              <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11 1 3 9l8 8"
+                  stroke="#1D2026"
+                  stroke-width="3"
+                  fill="none"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+            <img
+              className="image_product"
+              src={chosenImage.imagesrc}
+            />
+
+            <div className="imageSlidePrev">
+              <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="m2 1 8 8-8 8"
+                  stroke="#1D2026"
+                  stroke-width="3"
+                  fill="none"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
           <div className="ImageSectionRow">
-            <div className="image_thumb_container">
-              <img
-                className="image_thumb"
-                src="images/image-product-1-thumbnail.jpg"
-              />
-            </div>
-            <div className="image_thumb_container">
-              <img
-                className="image_thumb"
-                src="images/image-product-2-thumbnail.jpg"
-              />
-            </div>
-            <div className="image_thumb_container">
-              <img
-                className="image_thumb"
-                src="images/image-product-3-thumbnail.jpg"
-              />
-            </div>
-            <div className="image_thumb_container">
-              <img
-                className="image_thumb"
-                src="images/image-product-4-thumbnail.jpg"
-              />
-            </div>
+            {Object.values(image).map((value, index) => {
+              return (
+                <ImageThumbContainer
+                  // element={styleImage}
+                  active={index == styleImage - 1 ? true : false}
+                  key={index}
+                  onClick={() => HandleChangeImage(value, index)}
+                >
+                  <img className="image_thumb" src={value.thumbnail} />
+                </ImageThumbContainer>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -136,5 +187,13 @@ Home.ProductInof = function HomeProductInof({ ...restProps }) {
         </div>
       </div>
     </PorductInfo>
+  );
+};
+
+Home.ImageSlider = function ({ children, ...restProps }) {
+  return (
+    <ImageSlider>
+      <Home.ImageSection />
+    </ImageSlider>
   );
 };
