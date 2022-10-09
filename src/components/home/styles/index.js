@@ -36,38 +36,10 @@ export const ImageSection = styled.div`
       .image_product_Container {
         position: relative;
         .imageSlideNext {
-          position: absolute;
-          top: 45%;
-          left: -25px;
-          width: 50px;
-          height: 50px;
-          background: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          :hover {
-            path {
-              stroke: hsl(26, 100%, 55%);
-            }
-          }
+      display: none;
         }
         .imageSlidePrev {
-          position: absolute;
-          top: 45%;
-          right: -25px;
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          :hover {
-            path {
-              stroke: hsl(26, 100%, 55%);
-            }
-          }
+          display: none;
         }
         .image_product {
           width: auto;
@@ -113,8 +85,45 @@ export const ImageSection = styled.div`
     .ImageSectionCol {
       .ImageSectionColContainer {
         width: 100%;
+        .image_product_Container {
+          .imageSlidePrev {
+          position: absolute;
+          top: 45%;
+          left: -25px;
+          width: 50px;
+          height: 50px;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          :hover {
+            path {
+              stroke: hsl(26, 100%, 55%);
+            }
+          }
+          }
+          .imageSlideNext {
+            position: absolute;
+            top: 45%;
+            right: -25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            :hover {
+              path {
+                stroke: hsl(26, 100%, 55%);
+              }
+            }
+          }
+        }
+
         .ImageSectionRow {
-          display: none;
+          display: flex;
         }
       }
     }
@@ -131,11 +140,8 @@ export const ImageThumbContainer = styled.div`
     max-width: 100%;
     max-height: 100%;
     border-radius: 10px;
-    ${(p) => (p.active ? "border: 2px solid orange; opacity: 0.6;" : "border: 0")} 
-
+    ${(p) => (p.active ? "border: 2px solid orange; opacity: 0.6;" : null)}
   }
-
-
 `;
 
 export const PorductInfo = styled.div`
