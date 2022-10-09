@@ -20,8 +20,8 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
   const [chosenImage, setChosenImage] = useState({
     imagesrc: "./images/image-product-1.jpg",
   });
-  const [styleImage, setStyleImage] = useState(1);
-  const image = {
+  const [styleImage, setStyleImage] = useState(0);
+  const images = {
     iamge1: {
       thumbnail: "./images/image-product-1-thumbnail.jpg",
       imagesrc: "./images/image-product-1.jpg",
@@ -40,9 +40,33 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
     },
   };
 
+  const HandleSliderNextButtons = () => {
+    if (styleImage == 3)
+    {
+      setStyleImage(0);
+      setChosenImage(Object.values(images)[0]);
+
+    }else {
+    setChosenImage(Object.values(images)[styleImage + 1]);
+    setStyleImage(prevValue => prevValue + 1);
+    }
+  }
+  const HandleSliderPrevButtons = () => {
+    if (styleImage == 0)
+    {
+      setStyleImage(3);
+      setChosenImage(Object.values(images)[3]);
+
+    }else {
+    setChosenImage(Object.values(images)[styleImage - 1]);
+    setStyleImage(prevValue => prevValue - 1);
+    }
+  }
+
+
 
   const HandleChangeImage = (value, index) => {
-    setStyleImage(++index);
+    setStyleImage(index++);
     setChosenImage(value);
   };
   return (
@@ -50,12 +74,12 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
       <div className="ImageSectionCol">
         <div className="ImageSectionColContainer">
           <div className="image_product_Container">
-            <div className="imageSlideNext">
+            <div className="imageSlidePrev"onClick={() => HandleSliderPrevButtons()} >
               <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11 1 3 9l8 8"
                   stroke="#1D2026"
-                  stroke-width="3"
+                  strokeWidth="3"
                   fill="none"
                   fillRule="evenodd"
                 />
@@ -66,12 +90,12 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
               src={chosenImage.imagesrc}
             />
 
-            <div className="imageSlidePrev">
+            <div className="imageSlideNext" onClick={()=> HandleSliderNextButtons()}>
               <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="m2 1 8 8-8 8"
                   stroke="#1D2026"
-                  stroke-width="3"
+                  strokeWidth="3"
                   fill="none"
                   fillRule="evenodd"
                 />
@@ -79,11 +103,11 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
             </div>
           </div>
           <div className="ImageSectionRow">
-            {Object.values(image).map((value, index) => {
+            {Object.values(images).map((value, index) => {
               return (
                 <ImageThumbContainer
                   // element={styleImage}
-                  active={index == styleImage - 1 ? true : false}
+                  active={index == styleImage  ? true : false}
                   key={index}
                   onClick={() => HandleChangeImage(value, index)}
                 >
