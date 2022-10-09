@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import Header from "../../header";
 
 export const Container = styled.div`
   max-width: 1440px;
@@ -12,7 +13,7 @@ export const RowContainer = styled.div`
   height: 100%;
   justify-content: space-between;
   /* flex-wrap: wrap; */
-  @media (max-width: 1550px) {
+  @media (min-width: 480px) and (max-width: 1550px) {
     margin: 0 2rem;
   }
   @media (max-width: 1210px) {
@@ -32,36 +33,39 @@ export const ImageSection = styled.div`
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      .image_product {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-        border-radius: 15px;
+      .image_product_Container {
+        position: relative;
+        .imageSlideNext {
+      display: none;
+        }
+        .imageSlidePrev {
+          display: none;
+        }
+        .image_product {
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 100%;
+          border-radius: 15px;
+        }
       }
+
       .ImageSectionRow {
         display: flex;
         justify-content: space-between;
         width: 100%;
         margin-top: 30px;
-        .image_thumb_container {
-          flex-basis: calc(80% / 4);
-          height: 110px;
-          .image_thumb {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-          }
-        }
       }
     }
   }
   @media (max-width: 1210px) {
     .ImageSectionCol {
+      display: flex;
+      justify-content: center;
       .ImageSectionColContainer {
-        width: 100%;
+        width: 70%;
         .ImageSectionRow {
-          display: none;
+          /* display: none; */
         }
       }
     }
@@ -69,14 +73,74 @@ export const ImageSection = styled.div`
   @media (min-width: 768px) and (max-width: 1210px) {
     .ImageSectionCol {
       .ImageSectionColContainer {
-        .image_product {
-          width: 60%;
+        .image_product_Container {
+          .image_product {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .ImageSectionCol {
+      .ImageSectionColContainer {
+        width: 100%;
+        .image_product_Container {
+          .imageSlidePrev {
+          position: absolute;
+          top: 45%;
+          left: -25px;
+          width: 50px;
+          height: 50px;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          :hover {
+            path {
+              stroke: hsl(26, 100%, 55%);
+            }
+          }
+          }
+          .imageSlideNext {
+            position: absolute;
+            top: 45%;
+            right: -25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            :hover {
+              path {
+                stroke: hsl(26, 100%, 55%);
+              }
+            }
+          }
+        }
+
+        .ImageSectionRow {
+          display: flex;
         }
       }
     }
   }
   @media (min-width: 320px) and (max-width: 480px) {
-    padding: 35px;
+    padding: 0;
+  }
+`;
+
+export const ImageThumbContainer = styled.div`
+  flex-basis: calc(80% / 4);
+  height: auto;
+  .image_thumb {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    ${(p) => (p.active ? "border: 2px solid orange; opacity: 0.6;" : null)}
   }
 `;
 
@@ -202,10 +266,28 @@ export const PorductInfo = styled.div`
     }
   }
   @media (min-width: 320px) and (max-width: 480px) {
+    margin: 1rem 1rem;
     .productSectionCol {
       h2 {
         font-size: 3rem;
       }
     }
+  }
+`;
+
+export const ImageSlider = styled.div`
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  ${ImageSection} {
+    flex-basis: auto;
+    width: 800px;
   }
 `;
