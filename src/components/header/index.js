@@ -128,7 +128,7 @@ Header.CartImage = function HeaderCartImage({ children, ...restProps }) {
     </CartImage>
   );
 };
-function useOutsideAlerter(ref, setFunc, checkClick, state) {
+export function useOutsideAlerter(ref, setFunc, checkClick, state) {
   useEffect(() => {
     /**
      * check if clicked on outside of element
@@ -139,6 +139,7 @@ function useOutsideAlerter(ref, setFunc, checkClick, state) {
         !ref.current.contains(event.target) &&
         checkClick === "CartElements"
       ) {
+
         setFunc(false);
       }
       /**
@@ -149,6 +150,10 @@ function useOutsideAlerter(ref, setFunc, checkClick, state) {
         ref.current.contains(event.target) &&
         checkClick === "MainOpc"
       ) {
+        setFunc(false);
+      }
+      if (ref.current == event.target &&         checkClick === "fullSlider"      )
+      {
         setFunc(false);
       }
     }
@@ -165,7 +170,6 @@ Header.CartElements = function HeaderCartElements({ children, ...restProps }) {
   const { cardopen, setCardopen } = useContext(CartContext);
   const checkClick = "CartElements";
   useOutsideAlerter(wrapperRef, setCardopen, checkClick, cardopen);
-
   return (
     <CartElements
       style={{ display: cardopen ? "block" : "none" }}
@@ -184,7 +188,6 @@ Header.CardElementAddedContainer = function HeaderCardElementAddedContainer({
   children,
 }) {
   const { cart, setCart } = useContext(CartHandleContext);
-  console.log(cart.length);
   return (
     <CardElementAddedContainer>
       {Object.values(cart).map((value, index) => {

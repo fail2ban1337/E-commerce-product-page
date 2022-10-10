@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext } from "react";
+import React, { useContext, useState, createContext,useRef } from "react";
 import {
   Container,
   ImageSection,
@@ -8,6 +8,7 @@ import {
   ImageSlider,
 } from "./styles";
 import { CartHandleContext } from "../../App";
+import { useOutsideAlerter } from "../header";
 const ImageSliderFullContext = createContext();
 export default function Home({ children, ...restProps }) {
   const [oepnCheck, setOpenCheck] = useState(false);
@@ -24,7 +25,6 @@ Home.RowContainer = function ({ children, ...restProps }) {
 
 Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
   const { oepnCheck, setOpenCheck } = useContext(ImageSliderFullContext);
-  console.log("opencheck", oepnCheck);
   const [chosenImage, setChosenImage] = useState({
     imagesrc: "./images/image-product-1.jpg",
   });
@@ -230,11 +230,15 @@ Home.ProductInof = function HomeProductInof({ ...restProps }) {
 };
 
 Home.ImageSlider = function HomeImageSlider({ children, ...restProps }) {
+  const wrapperRef = useRef(null);
+
   const { oepnCheck, setOpenCheck } = useContext(ImageSliderFullContext);
-  console.log("last", oepnCheck);
+  const checkClick = "fullSlider";
+  useOutsideAlerter(wrapperRef, setOpenCheck, checkClick, oepnCheck);
+
   return (
     <>
-      <ImageSlider active={oepnCheck} {...restProps}>
+      <ImageSlider active={oepnCheck} {...restProps} ref={wrapperRef}>
         <Home.ImageSection>
           <div className="closeButton" onClick={() => setOpenCheck(false)}>
             <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
