@@ -41,8 +41,6 @@ export const NavListContainer = styled.div`
     z-index: 3;
     transition: all 0.3s ease-in;
   }
-  .test {
-  }
 `;
 
 export const NavClose = styled.div`
@@ -73,6 +71,13 @@ export const NavListElement = styled.li`
 
   &:hover {
     border-bottom: 4px solid ${({ theme }) => theme.orange};
+  }
+  @media (max-width: 861px) {
+    a {
+      color: black;
+
+      font-weight: 500;
+    }
   }
 `;
 export const NavListElementLink = styled.a`
