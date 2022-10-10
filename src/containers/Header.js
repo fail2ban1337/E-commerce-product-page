@@ -43,7 +43,7 @@ export default function HeaderContainer() {
             <Header.CardElementAddedContainer />
           </Header.CartElements>
         </Header.CartContainer>
-        <Header.UserImage src="images/image-avatar.png" />
+        <Header.UserImage src="./images/image-avatar.png" />
       </Header.ProfileContainer>
     </Header>
   );
