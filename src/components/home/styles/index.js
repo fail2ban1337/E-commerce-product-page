@@ -26,6 +26,10 @@ export const ImageSection = styled.div`
   padding: 70px;
   display: flex;
   justify-content: flex-end;
+  -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   .ImageSectionCol {
     .ImageSectionColContainer {
       width: 100%;
@@ -36,14 +40,13 @@ export const ImageSection = styled.div`
       .image_product_Container {
         position: relative;
         .imageSlidePrev {
-      display: none;
+          display: none;
           position: absolute;
           top: 45%;
           left: -25px;
           width: 50px;
           height: 50px;
           background: white;
-          display: flex;
           align-items: center;
           justify-content: center;
           border-radius: 50%;
@@ -56,21 +59,19 @@ export const ImageSection = styled.div`
         .imageSlideNext {
           display: none;
           position: absolute;
-            top: 45%;
-            right: -25px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            :hover {
-              path {
-                stroke: hsl(26, 100%, 55%);
-              }
+          top: 45%;
+          right: -25px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: white;
+          align-items: center;
+          justify-content: center;
+          :hover {
+            path {
+              stroke: hsl(26, 100%, 55%);
             }
-          
+          }
         }
         .image_product {
           width: auto;
@@ -94,9 +95,17 @@ export const ImageSection = styled.div`
       display: flex;
       justify-content: center;
       .ImageSectionColContainer {
+        .image_product_Container {
+          .imageSlidePrev {
+            display: flex;
+          }
+          .imageSlideNext {
+            display: flex;
+          }
+        }
         width: 70%;
         .ImageSectionRow {
-          /* display: none; */
+          display: none;
         }
       }
     }
@@ -113,26 +122,35 @@ export const ImageSection = styled.div`
     }
   }
   @media (max-width: 768px) {
+    padding: 1rem;
     .ImageSectionCol {
       .ImageSectionColContainer {
         width: 100%;
         .image_product_Container {
           .imageSlidePrev {
-   display: flex;
+            display: flex;
           }
           .imageSlideNext {
-display: flex;
+            display: flex;
           }
-        }
-
-        .ImageSectionRow {
-          display: flex;
         }
       }
     }
   }
   @media (min-width: 320px) and (max-width: 480px) {
-    padding: 0;
+    padding: 1rem;
+    .ImageSectionCol {
+      .ImageSectionColContainer {
+        .image_product_Container {
+          .imageSlidePrev {
+            left: 10px;
+          }
+          .imageSlideNext {
+            right: 10px;
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -264,6 +282,9 @@ export const PorductInfo = styled.div`
     }
   }
   @media (min-width: 768px) and (max-width: 1210px) {
+
+    margin-left: 0px;
+
     .productDesc {
       width: 70%;
     }
@@ -279,18 +300,33 @@ export const PorductInfo = styled.div`
 `;
 
 export const ImageSlider = styled.div`
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  display: flex;
+  display: ${(p) => (p.active ? "flex" : "none")};
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  flex-direction: column;
+  z-index: 9999;
+  @media (max-width: 1210px) {
+    display: none;
+  }
+  .closeButton {
+    position: absolute;
+    right: 4.5rem;
+    top: 1.5rem;
+    svg {
+      path {
+        fill: white;
+      }
+    }
+  }
   ${ImageSection} {
     flex-basis: auto;
-    width: 800px;
+    width: 700px;
+    position: relative;
   }
 `;
