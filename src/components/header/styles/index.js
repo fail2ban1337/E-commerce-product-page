@@ -99,6 +99,7 @@ export const CartContainer = styled.div``;
 
 export const CartImage = styled.div`
   position: relative;
+  cursor: pointer;
   .cartNumber {
     display: flex;
     align-items: center;
@@ -195,9 +196,8 @@ export const CardElementAddedRow = styled.div`
 export const UserImage = styled.img`
   width: 60px;
   border-radius: 50%;
-
   &:hover {
-    border: 2px solid ${({ theme }) => theme.orange};
+    outline: 2px solid ${({ theme }) => theme.orange};
   }
 `;
 
