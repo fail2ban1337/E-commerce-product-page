@@ -153,6 +153,7 @@ Home.ProductInof = function HomeProductInof({ ...restProps }) {
 
   const HandleAddToCart = (e) => {
     e.preventDefault();
+    SetProdTotal(0);
     if (prdTotal > 0) {
       setCart({
         products: { ...productData, prdTotal },
