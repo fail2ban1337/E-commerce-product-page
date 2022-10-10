@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, createContext } from "react";
 import {
   Container,
   ImageSection,
@@ -8,8 +8,14 @@ import {
   ImageSlider,
 } from "./styles";
 import { CartHandleContext } from "../../App";
+const ImageSliderFullContext = createContext();
 export default function Home({ children, ...restProps }) {
-  return <Container>{children}</Container>;
+  const [oepnCheck, setOpenCheck] = useState(false);
+  return (
+    <ImageSliderFullContext.Provider value={{ oepnCheck, setOpenCheck }}>
+      <Container>{children}</Container>
+    </ImageSliderFullContext.Provider>
+  );
 }
 
 Home.RowContainer = function ({ children, ...restProps }) {
@@ -17,6 +23,8 @@ Home.RowContainer = function ({ children, ...restProps }) {
 };
 
 Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
+  const { oepnCheck, setOpenCheck } = useContext(ImageSliderFullContext);
+  console.log("opencheck", oepnCheck);
   const [chosenImage, setChosenImage] = useState({
     imagesrc: "./images/image-product-1.jpg",
   });
@@ -41,40 +49,42 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
   };
 
   const HandleSliderNextButtons = () => {
-    if (styleImage == 3)
-    {
+    if (styleImage == 3) {
       setStyleImage(0);
       setChosenImage(Object.values(images)[0]);
-
-    }else {
-    setChosenImage(Object.values(images)[styleImage + 1]);
-    setStyleImage(prevValue => prevValue + 1);
+    } else {
+      setChosenImage(Object.values(images)[styleImage + 1]);
+      setStyleImage((prevValue) => prevValue + 1);
     }
-  }
+  };
   const HandleSliderPrevButtons = () => {
-    if (styleImage == 0)
-    {
+    if (styleImage == 0) {
       setStyleImage(3);
       setChosenImage(Object.values(images)[3]);
-
-    }else {
-    setChosenImage(Object.values(images)[styleImage - 1]);
-    setStyleImage(prevValue => prevValue - 1);
+    } else {
+      setChosenImage(Object.values(images)[styleImage - 1]);
+      setStyleImage((prevValue) => prevValue - 1);
     }
-  }
-
-
+  };
 
   const HandleChangeImage = (value, index) => {
     setStyleImage(index++);
     setChosenImage(value);
   };
+
+  const handleClick = () => {
+    setOpenCheck(true);
+  };
   return (
     <ImageSection>
       <div className="ImageSectionCol">
+        {children}
         <div className="ImageSectionColContainer">
           <div className="image_product_Container">
-            <div className="imageSlidePrev"onClick={() => HandleSliderPrevButtons()} >
+            <div
+              className="imageSlidePrev"
+              onClick={() => HandleSliderPrevButtons()}
+            >
               <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11 1 3 9l8 8"
@@ -86,11 +96,15 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
               </svg>
             </div>
             <img
+              onClick={(e) => handleClick(e)}
               className="image_product"
               src={chosenImage.imagesrc}
             />
 
-            <div className="imageSlideNext" onClick={()=> HandleSliderNextButtons()}>
+            <div
+              className="imageSlideNext"
+              onClick={() => HandleSliderNextButtons()}
+            >
               <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="m2 1 8 8-8 8"
@@ -107,7 +121,7 @@ Home.ImageSection = function HomeImageSection({ children, ...restProps }) {
               return (
                 <ImageThumbContainer
                   // element={styleImage}
-                  active={index == styleImage  ? true : false}
+                  active={index == styleImage ? true : false}
                   key={index}
                   onClick={() => HandleChangeImage(value, index)}
                 >
@@ -214,10 +228,24 @@ Home.ProductInof = function HomeProductInof({ ...restProps }) {
   );
 };
 
-Home.ImageSlider = function ({ children, ...restProps }) {
+Home.ImageSlider = function HomeImageSlider({ children, ...restProps }) {
+  const { oepnCheck, setOpenCheck } = useContext(ImageSliderFullContext);
+  console.log("last", oepnCheck);
   return (
-    <ImageSlider>
-      <Home.ImageSection />
-    </ImageSlider>
+    <>
+      <ImageSlider active={oepnCheck} {...restProps}>
+        <Home.ImageSection>
+          <div className="closeButton" onClick={() => setOpenCheck(false)}>
+            <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+                fill="#69707D"
+                fillRule="evenodd"
+              />
+            </svg>
+          </div>
+        </Home.ImageSection>
+      </ImageSlider>
+    </>
   );
 };
