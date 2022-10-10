@@ -35,11 +35,42 @@ export const ImageSection = styled.div`
       justify-content: center;
       .image_product_Container {
         position: relative;
-        .imageSlideNext {
-      display: none;
-        }
         .imageSlidePrev {
+      display: none;
+          position: absolute;
+          top: 45%;
+          left: -25px;
+          width: 50px;
+          height: 50px;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          :hover {
+            path {
+              stroke: hsl(26, 100%, 55%);
+            }
+          }
+        }
+        .imageSlideNext {
           display: none;
+          position: absolute;
+            top: 45%;
+            right: -25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            :hover {
+              path {
+                stroke: hsl(26, 100%, 55%);
+              }
+            }
+          
         }
         .image_product {
           width: auto;
@@ -87,38 +118,10 @@ export const ImageSection = styled.div`
         width: 100%;
         .image_product_Container {
           .imageSlidePrev {
-          position: absolute;
-          top: 45%;
-          left: -25px;
-          width: 50px;
-          height: 50px;
-          background: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          :hover {
-            path {
-              stroke: hsl(26, 100%, 55%);
-            }
-          }
+   display: flex;
           }
           .imageSlideNext {
-            position: absolute;
-            top: 45%;
-            right: -25px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            :hover {
-              path {
-                stroke: hsl(26, 100%, 55%);
-              }
-            }
+display: flex;
           }
         }
 
